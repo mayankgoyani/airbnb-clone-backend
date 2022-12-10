@@ -6,7 +6,7 @@ const propertyController = require("../controllers/property.controller");
 /* GET propertys listing. */
 router.get("/", propertyController.getAllProperty);
 router.post("/", propertyController.registerProperty);
-router.put("/", propertyController.updateProperty);
+router.put("/:propertyId", propertyController.updateProperty);
 router.get("/:propertyId", propertyController.getProperty);
 router.delete("/:propertyId", propertyController.deleteProperty);
 

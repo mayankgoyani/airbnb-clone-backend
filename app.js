@@ -11,6 +11,7 @@ const hostRouter = require("./routes/host.router");
 const propertyRouter = require("./routes/property.router");
 const reservationRouter = require("./routes/reservation.router");
 const serviceRouter = require("./routes/service.router");
+const cors = require("cors");
 
 const passport = require("passport");
 
@@ -21,7 +22,13 @@ connectToDb();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

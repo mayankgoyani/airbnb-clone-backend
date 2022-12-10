@@ -28,6 +28,7 @@ controller.registerUser = async (req, res, next) => {
       }
       password = hash;
       req.body.password = password;
+      req.body.emailId = req.body.emailId.toLowerCase();
       let user = new userModel(req.body);
       await user.save();
       return res.status(200).json({ message: "success", data: user });
@@ -94,7 +95,7 @@ controller.getAllUser = async (req, res, next) => {
 
 controller.getUser = async (req, res, next) => {
   try {
-    let user = await userModel.find({ _id: req.params.userId });
+    let user = await userModel.findOne({ _id: req.params.userId });
     return res.status(200).json({ message: "success", data: user });
   } catch (e) {
     res.status(500).json({
