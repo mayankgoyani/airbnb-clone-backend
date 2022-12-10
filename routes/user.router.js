@@ -1,12 +1,16 @@
 var express = require("express");
 var router = express.Router();
+const passport = require("passport");
+const userAuth = passport.authenticate("jwt", { session: false });
 
 const userController = require("../controllers/user.controller");
 
 /* GET users listing. */
 router.get("/", userController.getAllUser);
+router.get("/protected", userAuth, userController.protected);
 router.post("/", userController.registerUser);
-router.put("/", userController.updateUser);
+router.post("/login", userController.login);
+router.put("/:userId", userController.updateUser);
 router.get("/:userId", userController.getUser);
 router.delete("/:userId", userController.deleteUser);
 

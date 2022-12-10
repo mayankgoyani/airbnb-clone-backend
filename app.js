@@ -12,6 +12,8 @@ const propertyRouter = require("./routes/property.router");
 const reservationRouter = require("./routes/reservation.router");
 const serviceRouter = require("./routes/service.router");
 
+const passport = require("passport");
+
 const connectToDb = require("./db/connect");
 
 var app = express();
@@ -25,6 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(passport.initialize());
+require("./middlewares/passport")(passport);
 
 app.use("/", indexRouter);
 app.use("/favourite", favouriteRouter);
