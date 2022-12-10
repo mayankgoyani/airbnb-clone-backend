@@ -8,6 +8,13 @@ const userController = require("../controllers/user.controller");
 /* GET users listing. */
 router.get("/", userController.getAllUser);
 router.get("/protected", userAuth, userController.protected);
+router.get("/favourite", userAuth, userController.getUserFavourites);
+router.get(
+  "/favourite/detailed",
+  userAuth,
+  userController.getDetailedFavourites
+);
+
 router.post("/", userController.registerUser);
 router.post("/login", userController.login);
 router.put("/:userId", userController.updateUser);

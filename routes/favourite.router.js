@@ -1,14 +1,15 @@
 var express = require("express");
 var router = express.Router();
 
-const favouriteController =
-  require("../controllers/favourite.controller");
+const favouriteController = require("../controllers/favourite.controller");
+const passport = require("passport");
+const userAuth = passport.authenticate("jwt", { session: false });
 
 /* GET favourites listing. */
-router.get("/", favouriteController.getAllFavourite);
-router.post("/", favouriteController.registerFavourite);
-router.put("/", favouriteController.updateFavourite);
-router.get("/:favouriteId", favouriteController.getFavourite);
-router.delete("/:favouriteId", favouriteController.deleteFavourite);
+router.get("/", userAuth, favouriteController.getAllFavourite);
+router.post("/", userAuth, favouriteController.addToFavourite);
+router.put("/:favouriteId", userAuth, favouriteController.updateFavourite);
+router.get("/:favouriteId", userAuth, favouriteController.getFavourite);
+router.delete("/:favouriteId", userAuth, favouriteController.deleteFavourite);
 
 module.exports = router;

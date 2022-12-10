@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 
 const propertyController = require("../controllers/property.controller");
+const passport = require("passport");
+const userAuth = passport.authenticate("jwt", { session: false });
 
 /* GET propertys listing. */
 router.get("/", propertyController.getAllProperty);

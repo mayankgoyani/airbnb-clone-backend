@@ -1,7 +1,17 @@
 const controller = {};
+const favouriteModel = require("../models/favourite");
 
-controller.registerFavourite = async (req, res, next) => {
+controller.addToFavourite = async (req, res, next) => {
   try {
+    let favourite = new favouriteModel({
+      user_id: req.user._id,
+      property_id: req.body.propertyId,
+    });
+    favourite.save();
+    return res.status(201).json({
+      message: "success",
+      data: favourite,
+    });
   } catch (e) {
     res.status(500).json({
       message: e.message,
@@ -37,6 +47,11 @@ controller.updateFavourite = async (req, res, next) => {
 };
 controller.deleteFavourite = async (req, res, next) => {
   try {
+    let favourite = await favouriteModel.remove({ _id: req.body.favoriteId });
+    return res.status(201).json({
+      message: "success",
+      data: favourite,
+    });
   } catch (e) {
     res.status(500).json({
       message: e.message,

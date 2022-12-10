@@ -1,5 +1,6 @@
 const controller = {};
 const userModel = require("../models/user");
+const favouriteModel = require("../models/favourite");
 
 const jwt = require("jsonwebtoken");
 const SECRET = process.env.SECRET;
@@ -68,6 +69,7 @@ controller.login = async (req, res, next) => {
             token: token,
             message: "success",
             emailId: user.emailId,
+            userType: user.userType,
           });
         } else {
           return res.status(401).json({ message: "unauthorized" });
@@ -138,6 +140,36 @@ controller.deleteUser = async (req, res, next) => {
       }
     );
     return res.status(200).json({ message: "success", data: user });
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+  }
+};
+
+controller.getUserFavourites = async (req, res, next) => {
+  try {
+    let favourite = await favouriteModel.find({ user_id: req.user._id });
+    favourite = favourite ? favourite : [];
+    // let favourite = await favouriteModel.find({});
+
+    return res.status(200).json({ message: "success", data: favourite });
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+  }
+};
+
+controller.getDetailedFavourites = async (req, res, next) => {
+  try {
+    let favourite = await favouriteModel
+      // .find({})
+      .find({ user_id: req.user._id })
+      .populate(["user_id", "property_id"])
+      .exec();
+    favourite = favourite ? favourite : [];
+    return res.status(200).json({ message: "success", data: favourite });
   } catch (e) {
     res.status(500).json({
       message: e.message,
