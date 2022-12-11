@@ -14,6 +14,7 @@ router.get(
   userAuth,
   userController.getDetailedFavourites
 );
+router.get("/reservations", userAuth, userController.getReservations);
 
 router.post("/", userController.registerUser);
 router.post("/login", userController.login);

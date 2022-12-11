@@ -1,6 +1,7 @@
 const controller = {};
 const userModel = require("../models/user");
 const favouriteModel = require("../models/favourite");
+const reservationModel = require("../models/reservation");
 
 const jwt = require("jsonwebtoken");
 const SECRET = process.env.SECRET;
@@ -170,6 +171,22 @@ controller.getDetailedFavourites = async (req, res, next) => {
       .exec();
     favourite = favourite ? favourite : [];
     return res.status(200).json({ message: "success", data: favourite });
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+  }
+};
+
+controller.getReservations = async (req, res, next) => {
+  try {
+    let reservation = await reservationModel
+      // .find({})
+      .find({ user_id: req.user._id, isCancelled: false })
+      .populate(["user_id", "property_id"])
+      .exec();
+    reservation = reservation ? reservation : [];
+    return res.status(200).json({ message: "success", data: reservation });
   } catch (e) {
     res.status(500).json({
       message: e.message,

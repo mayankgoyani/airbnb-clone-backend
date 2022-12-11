@@ -47,7 +47,7 @@ controller.updateFavourite = async (req, res, next) => {
 };
 controller.deleteFavourite = async (req, res, next) => {
   try {
-    let favourite = await favouriteModel.remove({ _id: req.body.favoriteId });
+    let favourite = await favouriteModel.remove({ _id: req.params.favoriteId });
     return res.status(201).json({
       message: "success",
       data: favourite,
