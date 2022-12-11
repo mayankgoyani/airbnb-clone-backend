@@ -1,5 +1,6 @@
 const controller = {};
 const propertyModel = require("../models/property");
+const reviewModel = require("../models/review");
 
 controller.registerProperty = async (req, res, next) => {
   try {
@@ -67,6 +68,32 @@ controller.deleteProperty = async (req, res, next) => {
       }
     );
     return res.status(200).json({ message: "success", data: property });
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+  }
+};
+
+controller.addReview = async (req, res, next) => {
+  try {
+    req.body.user_id = req.user._id;
+    let review = await reviewModel(req.body);
+    await review.save();
+    return res.status(200).json({ message: "success", data: review });
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+  }
+};
+
+controller.getReviews = async (req, res, next) => {
+  try {
+    let review = await reviewModel
+      .find({ _id: req.params.propertyId })
+      .populate("user_id");
+    return res.status(200).json({ message: "success", data: review });
   } catch (e) {
     res.status(500).json({
       message: e.message,
