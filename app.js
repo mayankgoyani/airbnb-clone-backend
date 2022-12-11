@@ -10,7 +10,7 @@ const favouriteRouter = require("./routes/favourite.router");
 const hostRouter = require("./routes/host.router");
 const propertyRouter = require("./routes/property.router");
 const reservationRouter = require("./routes/reservation.router");
-const serviceRouter = require("./routes/service.router");
+const reviewRouter = require("./routes/review.router");
 const cors = require("cors");
 
 const passport = require("passport");
@@ -42,7 +42,7 @@ app.use("/favourite", favouriteRouter);
 app.use("/host", hostRouter);
 app.use("/property", propertyRouter);
 app.use("/reservation", reservationRouter);
-app.use("/service", serviceRouter);
+app.use("/review", reviewRouter);
 app.use("/user", userRouter);
 
 // catch 404 and forward to error handler

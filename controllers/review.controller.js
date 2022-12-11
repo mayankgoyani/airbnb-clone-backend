@@ -1,6 +1,6 @@
 const controller = {};
 
-controller.registerService = async (req, res, next) => {
+controller.registerReview = async (req, res, next) => {
   try {
   } catch (e) {
     res.status(500).json({
@@ -9,7 +9,7 @@ controller.registerService = async (req, res, next) => {
   }
 };
 
-controller.getAllService = async (req, res, next) => {
+controller.getAllReview = async (req, res, next) => {
   try {
   } catch (e) {
     res.status(500).json({
@@ -18,7 +18,7 @@ controller.getAllService = async (req, res, next) => {
   }
 };
 
-controller.getService = async (req, res, next) => {
+controller.getReview = async (req, res, next) => {
   try {
   } catch (e) {
     res.status(500).json({
@@ -27,7 +27,7 @@ controller.getService = async (req, res, next) => {
   }
 };
 
-controller.updateService = async (req, res, next) => {
+controller.updateReview = async (req, res, next) => {
   try {
   } catch (e) {
     res.status(500).json({
@@ -35,7 +35,7 @@ controller.updateService = async (req, res, next) => {
     });
   }
 };
-controller.deleteService = controller.registerService = async (req, res, next) => {
+controller.deleteReview = async (req, res, next) => {
   try {
   } catch (e) {
     res.status(500).json({

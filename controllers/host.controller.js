@@ -35,7 +35,7 @@ controller.updateHost = async (req, res, next) => {
     });
   }
 };
-controller.deleteHost = controller.registerHost = async (req, res, next) => {
+controller.deleteHost = async (req, res, next) => {
   try {
   } catch (e) {
     res.status(500).json({

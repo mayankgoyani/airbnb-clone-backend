@@ -51,11 +51,8 @@ controller.updateProperty = async (req, res, next) => {
     });
   }
 };
-controller.deleteProperty = controller.registerProperty = async (
-  req,
-  res,
-  next
-) => {
+
+controller.deleteProperty = async (req, res, next) => {
   try {
     let property = await propertyModel.findOneAndUpdate(
       { _id: req.params.propertyId },
