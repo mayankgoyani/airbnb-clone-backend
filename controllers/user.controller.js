@@ -23,6 +23,10 @@ controller.protected = async (req, res, next) => {
 controller.registerUser = async (req, res, next) => {
   try {
     let password = "";
+    let user = await userModel.findOne({ emailId: req.body.emailId.toLowerCase() });
+    if (user) {
+      return res.status(400).json({ message: "failed", data: "user alread exist" });
+    }
     bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
       if (err) {
         console.log(err);
