@@ -10,6 +10,6 @@ router.get("/", userAuth, favouriteController.getAllFavourite);
 router.post("/", userAuth, favouriteController.addToFavourite);
 router.put("/:favouriteId", userAuth, favouriteController.updateFavourite);
 router.get("/:favouriteId", userAuth, favouriteController.getFavourite);
-router.delete("/:favouriteId", userAuth, favouriteController.deleteFavourite);
+router.delete("/:propertyId", userAuth, favouriteController.deleteFavourite);
 
 module.exports = router;
