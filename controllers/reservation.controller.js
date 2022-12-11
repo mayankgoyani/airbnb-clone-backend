@@ -3,6 +3,7 @@ const reservationModel = require("../models/reservation");
 
 controller.addReservation = async (req, res, next) => {
   try {
+    req.body.user_id = req.user._id;
     let reservation = new reservationModel(req.body);
     await reservation.save();
     return res.status(201).json({ message: "success", data: reservation });
