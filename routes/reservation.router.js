@@ -6,11 +6,19 @@ const userAuth = passport.authenticate("jwt", { session: false });
 const reservationController = require("../controllers/reservation.controller");
 
 /* GET reservations listing. */
-router.get("/", reservationController.getAllReservation);
-router.get("/cancel/:reservationId", reservationController.cancelReservataion);
-router.post("/", reservationController.addReservation);
-router.put("/", reservationController.updateReservation);
-router.get("/:reservationId", reservationController.getReservation);
-router.delete("/:reservationId", reservationController.deleteReservation);
+router.get("/", userAuth, reservationController.getAllReservation);
+router.get(
+  "/cancel/:reservationId",
+  userAuth,
+  reservationController.cancelReservataion
+);
+router.post("/", userAuth, reservationController.addReservation);
+router.put("/", userAuth, reservationController.updateReservation);
+router.get("/:reservationId", userAuth, reservationController.getReservation);
+router.delete(
+  "/:reservationId",
+  userAuth,
+  reservationController.deleteReservation
+);
 
 module.exports = router;
