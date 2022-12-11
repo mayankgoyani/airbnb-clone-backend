@@ -1,8 +1,11 @@
 const controller = {};
 const reservationModel = require("../models/reservation");
 
-controller.registerReservation = async (req, res, next) => {
+controller.addReservation = async (req, res, next) => {
   try {
+    let reservation = new reservationModel(req.body);
+    await reservation.save();
+    return res.status(201).json({ message: "success", data: reservation });
   } catch (e) {
     res.status(500).json({
       message: e.message,
