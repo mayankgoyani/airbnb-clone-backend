@@ -5,6 +5,7 @@ const reservationController = require("../controllers/reservation.controller");
 
 /* GET reservations listing. */
 router.get("/", reservationController.getAllReservation);
+router.get("/cancel/:reservationId", reservationController.cancelReservataion);
 router.post("/", reservationController.registerReservation);
 router.put("/", reservationController.updateReservation);
 router.get("/:reservationId", reservationController.getReservation);
